@@ -6,7 +6,7 @@ const url = "ws://185.193.67.250:4506/websocket-example";
 const ws = new WebSocketClient(url);
 
 function sendHeartbeat() {
-  const data = [2, crypto.randomUUID(), 'Heartbeat', {}];
+  const data = JSON.stringify([2, crypto.randomUUID(), 'Heartbeat', {}]);
 
   helpers.log("Sending data to server:", data);
   ws.send(data);
@@ -15,6 +15,8 @@ function sendHeartbeat() {
 let _interval = null;
 const heartbeat = {
   start: function () {
+    sendHeartbeat();
+
     _interval = setInterval(function () {
       sendHeartbeat();
     }, 15_000);
