@@ -1,6 +1,7 @@
 const { Server: WebSocketServer } = require("ws");
 const express = require("express");
 const crypto = require("crypto");
+const helpers = require("./lib/helpers");
 
 // init websocket
 const wss = new WebSocketServer({
@@ -10,7 +11,7 @@ const wss = new WebSocketServer({
 wss.on("connection", function (ws) {
   ws.on("close", function (code, reasonBuffer) {
     const reason = reasonBuffer.toString("utf-8");
-    console.log(`Socket disconnected: ${ws.socketId}`, {
+    helpers.log(`Socket disconnected: ${ws.socketId}`, {
       code: code,
       reason: reason,
     });
@@ -32,10 +33,10 @@ app.get("/websocket-example", function (req, res, next) {
     websocket.socketId = crypto.randomUUID().toLowerCase();
     wss.emit("connection", websocket, req);
 
-    console.log("Calling websocket listener function.");
+    helpers.log("Calling websocket listener function.");
 
     websocket.on("message", function (data) {
-      console.log("WebSocket data received and responded.");
+      helpers.log("WebSocket data received and responded:", data);
       websocket.send(data);
     });
   });
@@ -43,5 +44,5 @@ app.get("/websocket-example", function (req, res, next) {
 
 const port = 4506;
 app.listen(port, function () {
-  console.log(`App starting at port ${port} !!!`);
+  helpers.log(`App starting at port ${port} !!!`);
 });

@@ -1,11 +1,15 @@
 const WebSocketClient = require("ws");
 const crypto = require("crypto");
+const helpers = require("./lib/helpers");
 
 const url = "ws://185.193.67.250:4506/websocket-example";
 const ws = new WebSocketClient(url);
 
 function sendHeartbeat() {
-  ws.send([2, crypto.randomUUID(), 'Heartbeat', {}]);
+  const data = [2, crypto.randomUUID(), 'Heartbeat', {}];
+
+  helpers.log("Sending data to server:", data);
+  ws.send(data);
 }
 
 let _interval = null;
@@ -21,15 +25,15 @@ const heartbeat = {
 };
 
 ws.on("open", function open() {
-  console.log("WebSocket connected");
+  helpers.log("WebSocket connected");
   heartbeat.start();
 });
 
 ws.on("close", function () {
-  console.log("WebSocket disconnected");
+  helpers.log("WebSocket disconnected");
   heartbeat.stop();
 });
 
 ws.on("message", function (data) {
-  console.log("WebSocket data received from server.");
+  helpers.log("WebSocket data received from server:", data);
 });
