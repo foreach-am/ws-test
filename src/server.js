@@ -8,14 +8,9 @@ const wss = new WebSocketServer({
 });
 
 wss.on("connection", function (ws) {
-  ws.on("message", function (data) {
-    console.log("WebSocket data received and responded.");
-    ws.send(data);
-  });
-
   ws.on("close", function (code, reasonBuffer) {
     const reason = reasonBuffer.toString("utf-8");
-    console.log(`Socket disconnected: ${es.socketId}`, {
+    console.log(`Socket disconnected: ${ws.socketId}`, {
       code: code,
       reason: reason,
     });
@@ -38,7 +33,11 @@ app.get("/websocket-example", function (req, res, next) {
     wss.emit("connection", websocket, req);
 
     console.log("Calling websocket listener function.");
-    callback(websocket);
+
+    websocket.on("message", function (data) {
+      console.log("WebSocket data received and responded.");
+      websocket.send(data);
+    });
   });
 });
 
