@@ -14,14 +14,14 @@ function zerofill(value, length = 2) {
 function datetime() {
   const now = new Date();
   const date = [now.getFullYear(), now.getMonth() + 1, now.getDate()]
-    .map(zerofill)
+    .map((val) => zerofill(val, 2))
     .join('-');
 
   const time = [now.getHours(), now.getMinutes(), now.getSeconds()]
-    .map(zerofill)
-    .join('-');
+    .map((val) => zerofill(val, 2))
+    .join(':');
 
-  const milliseconds = now.getMilliseconds();
+  const milliseconds = zerofill(now.getMilliseconds(), 3);
 
   return `${date} ${time}.${milliseconds}`;
 }
