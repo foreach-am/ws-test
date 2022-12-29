@@ -37,7 +37,7 @@ app.get("/websocket-example", function (req, res, next) {
     websocket.socketId = crypto.randomUUID().toLowerCase();
     wss.emit("connection", websocket, req);
 
-    libraryHelpers.log.info("Calling websocket listener function.");
+    console.log("Calling websocket listener function.");
     callback(websocket);
   });
 });
