@@ -35,5 +35,5 @@ ws.on("close", function () {
 });
 
 ws.on("message", function (data) {
-  helpers.log("WebSocket data received from server:", data);
+  helpers.log("WebSocket data received from server:", data.toString('utf-8'));
 });

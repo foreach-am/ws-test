@@ -33,7 +33,7 @@ app.get("/websocket-example", function (req, res, next) {
     websocket.socketId = crypto.randomUUID().toLowerCase();
     wss.emit("connection", websocket, req);
 
-    helpers.log("Calling websocket listener function.");
+    helpers.log("Registering onmessage listener function.");
 
     websocket.on("message", function (data) {
       helpers.log("WebSocket data received and responded:", data.toString('utf-8'));

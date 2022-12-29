@@ -1,5 +1,5 @@
 function log(...args) {
-  console.log(`[${datetime()}] >>>`, ...args);
+  console.log(`[${datetime()}]  >> `, ...args);
 }
 
 function zerofill(value, length = 2) {
@@ -21,9 +21,9 @@ function datetime() {
     .map(zerofill)
     .join('-');
 
-  const millis = now.getMilliseconds();
+  const milliseconds = now.getMilliseconds();
 
-  return `${date} ${time}.${millis}`;
+  return `${date} ${time}.${milliseconds}`;
 }
 
 module.exports.datetime = datetime;
