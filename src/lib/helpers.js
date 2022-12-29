@@ -2,9 +2,10 @@ function log(...args) {
   console.log(`[${datetime()}] >>>`, ...args);
 }
 
-function zerofill(value) {
-  if (value < 10) {
-    return `0${value}`;
+function zerofill(value, length = 2) {
+  value = value.toString();
+  while (value.length < length) {
+    value = `0${value}`;
   }
 
   return value;

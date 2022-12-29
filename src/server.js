@@ -36,7 +36,7 @@ app.get("/websocket-example", function (req, res, next) {
     helpers.log("Calling websocket listener function.");
 
     websocket.on("message", function (data) {
-      helpers.log("WebSocket data received and responded:", data);
+      helpers.log("WebSocket data received and responded:", data.toString('utf-8'));
       websocket.send(data);
     });
   });
