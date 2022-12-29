@@ -15,7 +15,7 @@ wss.on("connection", function (ws) {
 
   ws.on("close", function (code, reasonBuffer) {
     const reason = reasonBuffer.toString("utf-8");
-    console.log(`Socket disconnected: ${socketId}`, {
+    console.log(`Socket disconnected: ${es.socketId}`, {
       code: code,
       reason: reason,
     });
