@@ -1,3 +1,5 @@
+require("./lib/configure");
+
 const { Server: WebSocketServer } = require("ws");
 const express = require("express");
 const crypto = require("crypto");
@@ -42,7 +44,7 @@ app.get("/websocket-example", function (req, res, next) {
   });
 });
 
-const port = 4506;
+const port = process.env.WS_PORT || 3000;
 app.listen(port, function () {
   helpers.log(`App starting at port ${port} !!!`);
 });

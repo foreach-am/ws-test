@@ -1,8 +1,12 @@
+require("./lib/configure");
+
 const WebSocketClient = require("ws");
 const crypto = require("crypto");
 const helpers = require("./lib/helpers");
 
-const url = "ws://185.193.67.250:4506/websocket-example";
+const { WS_URL, WS_PORT } = process.env;
+
+const url = `ws://${WS_URL}:${WS_PORT}/websocket-example`;
 const ws = new WebSocketClient(url);
 
 function sendHeartbeat() {
