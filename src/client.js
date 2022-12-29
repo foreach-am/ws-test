@@ -9,6 +9,8 @@ const { WS_URL, WS_PORT } = process.env;
 const url = `ws://${WS_URL}:${WS_PORT}/websocket-example`;
 const ws = new WebSocketClient(url);
 
+helpers.log('Connection to server with url:', url);
+
 function sendHeartbeat() {
   const data = JSON.stringify([2, crypto.randomUUID(), 'Heartbeat', {}]);
 
